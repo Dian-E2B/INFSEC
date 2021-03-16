@@ -21,11 +21,9 @@
          <ul class="dropdown-menu">
                                     <li><a href="./add_productform.php"><i style="font-size:16px;"class="fas fa-cubes"></i>&nbsp;Add Product</a></li>
                                     <li><a href="./add_supplierform.php"><i class="fas fa-parachute-box"></i>&nbsp;Add Supplier</a></li>
-                                    <li><a href="./table1.php"><i style="font-size:20px;" class="fad fa-window-close"></i>&nbsp;Inactive Products</a></li>
-                                    <!-- <li><a href="#">Temp</a></li>
-                                    <li><a href="#">Temp</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Temp</a></li> -->
+                                    <li><a href="./table1.php"><i style="font-size:20px;" class="fad fa-window-close"></i>&nbsp;Inactive Products</a>
+                                    </li>
+                            
                                
                                  
         </ul>
