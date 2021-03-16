@@ -13,8 +13,9 @@ session_start();
 //getvalues
 $username=$_POST['user'];
 $password=$_POST['pass'];
+$hashPassword=md5($password);
 
-$sql="SELECT *from tbl_login WHERE username='$username' AND password='$password'";
+$sql="SELECT *from tbl_login WHERE username='$username' AND password='$hashPassword'";
 $result=mysqli_query($connection,$sql);
 $confirm_result=mysqli_fetch_assoc($result);
 
