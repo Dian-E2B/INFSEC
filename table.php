@@ -62,40 +62,7 @@ body:not(.modal-open){
                 <div class="container-fluid">
                     <div class="row">
                       <div class="col-9 mx-auto text-center">
-                        <div class="">
-
-                          <?php
-                          if(isset($_SESSION['error_message']))
-                          {
-                          ?>
-                          <body onload="error('top','center')">
-                          <?php
-                          unset($_SESSION['error_message']);
-                          }
-                          ?>
-                        </div>
-                        <div class="">
-                          <?php
-                          if(isset($_SESSION['success_added']))
-                          {
-                          ?>
-                          <body onload="successadded('top','center')">
-                          <?php
-                          unset($_SESSION['success_added']);
-                          }
-                          ?>
-                        </div>
-                        <div class="">
-                        <?php
-
-                        if(isset($_SESSION['success_message'])) {
-                        ?>
-
-                        <body onload="success('top','center')">
-                        <?php unset($_SESSION['success_message']);
-                        }
-                        ?>
-                          </div>
+                      
                       </div>
                         <div class="col-md-12">
                             <div class="card">
