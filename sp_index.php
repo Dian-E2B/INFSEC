@@ -25,7 +25,7 @@ session_start();
   <script src="assets/js/bootstrap-notify.js"></script>
   <script src="assets/js/demo.js"></script>
 </head>
-<body>
+<body style="background-color:blue;">
   <div class="container">
 
    <div class="col-9 mx-auto text-center">
@@ -54,18 +54,6 @@ session_start();
           }
           ?>
         </div>
-
-        <div class="">
-        <?php
-
-        if(isset($_SESSION['success_message2'])) {
-          ?>
-
-          <body onload="success2('top','center')">
-            <?php unset($_SESSION['success_message2']);
-          }
-          ?>
-        </div>
       </div>
 
 
@@ -74,7 +62,7 @@ session_start();
           <div class="modal-content">
            <div class="modal-header">
             <button hidden type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Login to</h4>
+            <h4 class="modal-title">Login as SuperAdmin</h4>
           </div>
           <div class="modal-body">
             <div  class="box">
@@ -89,7 +77,7 @@ session_start();
                 </div><div class="error"></div>
 
                 <div class="form loginBox">
-                  <form method="post" action="z_execute/validate.php" accept-charset="UTF-8">
+                  <form method="post" action="z_execute/sa_validate.php" accept-charset="UTF-8">
                     <input  required="" id="Username" class="form-control" type="text" placeholder="Username" name="user">
                     <input required style="margin-top:10px;" reqid="password" class="form-control" type="password" placeholder="Password" name="pass">
                     <input required style="margin-top:10px; background-color: blue;" class="btn btn-login"  value="Login" type="submit">
@@ -101,20 +89,12 @@ session_start();
 
           </div>
           <div class="modal-footer">
-            <div class="forgot login-footer">
-              <span>Looking to
-                <a href="register.php">create an account</a>
-             ?</span>
-           </div>
-           <div class="forgot register-footer" style="display:none">
-             <span>Already have an account?</span>
-             <a href="javascript: showLoginForm();">Login</a>
-           </div>
+           
          </div>
        </div>
      </div>
    </div>
- </div>
+ </div> 
 
  <script type="text/javascript">
   $(document).ready(function(){
@@ -144,25 +124,10 @@ session_start();
   });
   }
 
-    function success2() {
-    $.notify({
-
-      message:'Successfully Registered.'
-    }, {
-    // settings
-    offset: 50,
-    type: 'success',
-    placement: {
-      from: "top",
-      align: "center"
-    }
-  });
-  }
-
   function error() {
     $.notify({
 
-      message:'Incorrect username or password!'
+      message:'3 failed Attempts already need superadmin request'
     }, {
     // settings
     offset: 50,

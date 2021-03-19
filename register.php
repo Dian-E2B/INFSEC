@@ -3,6 +3,13 @@
 <?php
 include 'z_execute/connection.php';
 session_start();
+$sql2="select quest_id,question from tbl_questions";//!!
+ $result2 = mysqli_query($connection, $sql2);//!!
+ if ($result2) {//!!
+ } else {
+   echo "Error: " . $sql2 . "<br>" . mysqli_error($connection);
+ }
+
 ?>
 <head>
 
@@ -13,9 +20,10 @@ session_start();
 
 
   <style>body{padding-top: 60px;}</style>
-
+<link href="custom/css/bootstrap.css" rel="stylesheet">
   <link href="assetslogin/css/bootstrap.css" rel="stylesheet" />
   <link href="animate/animate.css" rel="stylesheet">
+
   <link href="assetslogin/css/login-register.css" rel="stylesheet" />
   <script src="assets/js/light-bootstrap-dashboard.js"></script>
 
@@ -54,18 +62,6 @@ session_start();
           }
           ?>
         </div>
-
-        <div class="">
-        <?php
-
-        if(isset($_SESSION['success_message2'])) {
-          ?>
-
-          <body onload="success2('top','center')">
-            <?php unset($_SESSION['success_message2']);
-          }
-          ?>
-        </div>
       </div>
 
 
@@ -74,7 +70,7 @@ session_start();
           <div class="modal-content">
            <div class="modal-header">
             <button hidden type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Login to</h4>
+            <h4 class="modal-title">Register to</h4>
           </div>
           <div class="modal-body">
             <div  class="box">
@@ -89,51 +85,64 @@ session_start();
                 </div><div class="error"></div>
 
                 <div class="form loginBox">
-                  <form method="post" action="z_execute/validate.php" accept-charset="UTF-8">
+                  <form method="post" action="exec_register.php" accept-charset="UTF-8">
                     <input  required="" id="Username" class="form-control" type="text" placeholder="Username" name="user">
-                    <input required style="margin-top:10px;" reqid="password" class="form-control" type="password" placeholder="Password" name="pass">
-                    <input required style="margin-top:10px; background-color: blue;" class="btn btn-login"  value="Login" type="submit">
+                    <input required style="margin-top:10px;" reqid="pass" class="form-control" type="password" placeholder="Password" name="pass">
+                    <input required style="margin-top:10px;" reqid="pass" class="form-control" type="password" placeholder="Confirm Password" name="pass2">
 
-                  </form>
+
+                    <select style="height:45px; margin-top:10px;" name="var_question" class="custom-select">
+                      <option selected>Choose your security question</option>
+                      <?php
+                      while ($row = mysqli_fetch_assoc($result2)){
+                        ?>
+                        <option value="<?php echo $row['quest_id'] ?>">
+                          <?php echo $row['question'] ?></option>
+                          <?php
+                        }
+                        ?>
+                      </select>
+
+                            <input required style="margin-top:10px;" reqid="pass" class="form-control" type="text" placeholder="Answer" name="sec_answer">
+
+                      <input required style="margin-top:10px;" class="btn btn-login"  value="Register" type="submit">
+
+                    </form>
+                  </div>
                 </div>
               </div>
-            </div>
 
-          </div>
-          <div class="modal-footer">
-            <div class="forgot login-footer">
-              <span>Looking to
-                <a href="register.php">create an account</a>
-             ?</span>
-           </div>
-           <div class="forgot register-footer" style="display:none">
-             <span>Already have an account?</span>
-             <a href="javascript: showLoginForm();">Login</a>
+            </div>
+            <div class="modal-footer">
+
+              <div class="forgot register-footer"">
+               <span>Already have an account?</span>
+               <a href="index.php">Login</a>
+             </div>
            </div>
          </div>
        </div>
      </div>
    </div>
- </div>
 
- <script type="text/javascript">
-  $(document).ready(function(){
-    openLoginModal();
-  });
+   <script type="text/javascript">
+    $(document).ready(function(){
+      openLoginModal();
+    });
 
-  $('#loginModal').modal({
-    backdrop: 'static',
-    keyboard: false
-  })
+    $('#loginModal').modal({
+      backdrop: 'static',
+      keyboard: false
+    })
 
 
-</script>
-<script type="text/javascript">
-  function success() {
-    $.notify({
+  </script>
+  <script type="text/javascript">
+    function success() {
+      $.notify({
 
-      message:'Password successfully changed.'
-    }, {
+        message:'Password successfully changed.'
+      }, {
     // settings
     offset: 50,
     type: 'success',
@@ -142,28 +151,13 @@ session_start();
       align: "center"
     }
   });
-  }
-
-    function success2() {
-    $.notify({
-
-      message:'Successfully Registered.'
-    }, {
-    // settings
-    offset: 50,
-    type: 'success',
-    placement: {
-      from: "top",
-      align: "center"
     }
-  });
-  }
 
-  function error() {
-    $.notify({
+    function error() {
+      $.notify({
 
-      message:'Incorrect username or password!'
-    }, {
+        message:'Password mismatched!'
+      }, {
     // settings
     offset: 50,
     type: 'danger',
@@ -172,9 +166,9 @@ session_start();
       align: "center"
     }
   });
-  }
+    }
 
-</script>
+  </script>
 
 </body>
 </html>

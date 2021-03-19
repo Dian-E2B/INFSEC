@@ -16,28 +16,28 @@ $username=$_POST['user'];
 $password=$_POST['pass'];
 $hashPassword=md5($password);
 
-$sql1="SELECT username from tbl_login WHERE username='$username'";
+$sql1="SELECT username from tbl_spadmin WHERE username='$username'";
 $result1=mysqli_query($connection,$sql1);
 $confirm_result1=mysqli_fetch_assoc($result1);
 
-if (mysqli_num_rows($result1) > 0) {
+if (mysqli_num_rows($result1) > 0) { //if naa nag username.
 	$_SESSION['error2']="Username found!";
 	echo "FOUND!";
 	echo $username;
-	header("Location:../index1.php");
+	//header("Location:../index1.php");
 	//unset($_SESSION['error_all']);
 
-	$sql="SELECT *from tbl_login WHERE username='$username' AND password='$hashPassword'";
+	$sql="SELECT *from tbl_spadmin WHERE username='$username' AND password='$hashPassword'";
 	$result=mysqli_query($connection,$sql);
 	$confirm_result=mysqli_fetch_assoc($result);
 
 			if($confirm_result){
 				unset($_SESSION['numTries']);
-				$getusername=$confirm_result['Username'];
+				$getusername=$confirm_result['username'];
 
 
 				$_SESSION['username']=$getusername;
-				$_SESSION['user_id']=$getuserid;
+				//$_SESSION['user_id']=$getuserid;
 
 				$sql2="INSERT into tbl_records(actions,date,user_id) values('$getusername Logged in','$date_today','1')";
 				if (!mysqli_query($connection, $sql2)) {
@@ -64,7 +64,7 @@ if (mysqli_num_rows($result1) > 0) {
 						header("Location:../sp_index.php");
 					}else{
 						$_SESSION['numTries'] ++;
-						header("Location:../index1.php");
+						header("Location:../sp_index.php");
 					}
 					echo $_SESSION['numTries'];
 				}
@@ -79,7 +79,7 @@ if (mysqli_num_rows($result1) > 0) {
 
 						}else{
 							$_SESSION['numTries'] ++;
-							header("Location:../index1.php");
+							header("Location:../sp_index.php");
 						}
 
 
@@ -90,7 +90,7 @@ if (mysqli_num_rows($result1) > 0) {
 					header("Location:../sp_index.php");
 				}else{
 					$_SESSION['numTries'] ++;
-					header("Location:../index1.php");
+					header("Location:../sp_index.php");
 				}
 				
 				}
@@ -103,11 +103,11 @@ if (mysqli_num_rows($result1) > 0) {
 			}
 }
 
-else{
+else{ //if wala nag username.
 	echo "NOT FOUND!";
 	echo $username;
 	$_SESSION['error1']="Username not found!";
-	header("Location:../index1.php");
+	header("Location:../sp_index.php");
 
 	
 	

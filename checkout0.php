@@ -142,7 +142,7 @@ $var_lastidreal=$row7['maxcusid'];
 $var_supertotal=$var_total-$var_discountload;
 
  ?>
-
+8
 
 <head>
   <?php include 'z_otherUI/mainhead.php'; ?>
